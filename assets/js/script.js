@@ -168,3 +168,11 @@ function loadlastCity() {
     currentWeather(city);
   }
 }
+
+// function to clear the search history from the page
+function clearHistory(event) {
+  event.preventDefault();
+  sCity = [];
+  localStorage.removeItem("cityname");
+  document.location.reload();
+}
