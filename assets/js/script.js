@@ -23,3 +23,11 @@ function find(city) {
   return 1;
 }
 
+// function that displays the current and future weather after grabing the city from the input box
+function displayWeather(event) {
+  event.preventDefault();
+  if (searchCity.val().trim() !== "") {
+    city = searchCity.val().trim();
+    currentWeather(city);
+  }
+}
