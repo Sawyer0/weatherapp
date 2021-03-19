@@ -35,7 +35,10 @@ function displayWeather(event) {
 // function to get data from the api using an AJAX call
 function currentWeather(city) {
   var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    city +
+    "&APPID=" +
+    APIKey;
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -91,7 +94,12 @@ function currentWeather(city) {
 // function that will return the UVindex response
 function UVIndex(ln, lt) {
   var uvqURL =
-    "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lt + "&lon=" + ln;
+    "https://api.openweathermap.org/data/2.5/uvi?appid=" +
+    APIKey +
+    "&lat=" +
+    lt +
+    "&lon=" +
+    ln;
   $.ajax({
     url: uvqURL,
     method: "GET",
@@ -104,7 +112,10 @@ function UVIndex(ln, lt) {
 function forecast(cityid) {
   var dayover = false;
   var queryforcastURL =
-    "https://api.openweathermap.org/data/2.5/forecast?id=" + cityid + "&appid=" + APIKey;
+    "https://api.openweathermap.org/data/2.5/forecast?id=" +
+    cityid +
+    "&appid=" +
+    APIKey;
   $.ajax({
     url: queryforcastURL,
     method: "GET",
@@ -128,18 +139,32 @@ function forecast(cityid) {
 }
 
 // function to dynamically add the passed city into the search history
-function addToList(c){
-  var listEl= $("<li>"+c.toUpperCase()+"</li>");
-  $(listEl).attr("class","list-group-item");
-  $(listEl).attr("data-value",c.toUpperCase());
+function addToList(c) {
+  var listEl = $("<li>" + c.toUpperCase() + "</li>");
+  $(listEl).attr("class", "list-group-item");
+  $(listEl).attr("data-value", c.toUpperCase());
   $(".list-group").append(listEl);
 }
 
 // function to display the past searched city again when the it is clicked in search history
-function invokePastSearch(event){
-  var liEl=event.target;
-  if (event.target.matches("li")){
-      city=liEl.textContent.trim();
-      currentWeather(city);
+function invokePastSearch(event) {
+  var liEl = event.target;
+  if (event.target.matches("li")) {
+    city = liEl.textContent.trim();
+    currentWeather(city);
+  }
+}
+
+// function for the search history
+function loadlastCity() {
+  $("ul").empty();
+  var sCity = JSON.parse(localStorage.getItem("cityname"));
+  if (sCity !== null) {
+    sCity = JSON.parse(localStorage.getItem("cityname"));
+    for (i = 0; i < sCity.length; i++) {
+      addToList(sCity[i]);
+    }
+    city = sCity[i - 1];
+    currentWeather(city);
   }
 }
