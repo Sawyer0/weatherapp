@@ -48,7 +48,7 @@ function currentWeather(city) {
 
     // add a date format method for conversion
     var date = new Date(response.dt * 1000).toLocaleDateString();
-    
+
     // parse the response for name of city & concatinate the date and weather icon
     $(currentCity).html(
       response.name + "(" + date + ")" + "<img src=" + iconurl + ">"
@@ -57,5 +57,13 @@ function currentWeather(city) {
     // parse the response to display the current temperature & convert the temp to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
     $(currentTemperature).html(tempF.toFixed(2) + "&#8457");
+
+    // display the humidity
+    $(currentHumidty).html(response.main.humidity + "%");
+
+    // display the wind speeds and convert them into MPH
+    var ws = response.wind.speed;
+    var windsmph = (ws * 2.237).toFixed(1);
+    $(currentWSpeed).html(windsmph + "MPH");
   });
 }
