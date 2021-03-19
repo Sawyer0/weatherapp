@@ -126,3 +126,12 @@ function forecast(cityid) {
     }
   });
 }
+
+// function to dynamically add the passed city into the search history
+function addToList(c){
+  var listEl= $("<li>"+c.toUpperCase()+"</li>");
+  $(listEl).attr("class","list-group-item");
+  $(listEl).attr("data-value",c.toUpperCase());
+  $(".list-group").append(listEl);
+}
+
