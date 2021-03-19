@@ -47,6 +47,15 @@ function currentWeather(city) {
       "https://openweathermap.org/img/wn/" + weathericon + "@2x.png";
 
     // add a date format method for conversion
-    var date = new Date(response.dt * 1000).toLocaleDateString();.
+    var date = new Date(response.dt * 1000).toLocaleDateString();
+    
+    // parse the response for name of city & concatinate the date and weather icon
+    $(currentCity).html(
+      response.name + "(" + date + ")" + "<img src=" + iconurl + ">"
+    );
+
+    // parse the response to display the current temperature & convert the temp to fahrenheit
+    var tempF = (response.main.temp - 273.15) * 1.8 + 32;
+    $(currentTemperature).html(tempF.toFixed(2) + "&#8457");
   });
 }
