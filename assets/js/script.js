@@ -41,5 +41,12 @@ function currentWeather(city) {
     method: "GET",
   }).then(function (response) {
     console.log(response);
+    // get weather icons from the api
+    var weathericon = response.weather[0].icon;
+    var iconurl =
+      "https://openweathermap.org/img/wn/" + weathericon + "@2x.png";
+
+    // add a date format method for conversion
+    var date = new Date(response.dt * 1000).toLocaleDateString();.
   });
 }
